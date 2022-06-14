@@ -73,7 +73,7 @@ namespace DB_Tuple_Market_Console
             SqlCommand cmd = new SqlCommand("UPDATE t_food");
 
         }
-        //ar == i miss you. || ar != i miss you
+      
         public void ShowData(SqlConnection con )
         {
             con.Open();
