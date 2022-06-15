@@ -5,36 +5,14 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Data.SqlClient;
 using System.Data;
-using System.Windows.Forms;
+using System.Windows.Forms; 
 
 namespace DB_Tuple_Market_Console
 {
-    public class Foodie
+    internal class Ingredients : Foodie
     {
-        //data field. 
-        public string Name { get; set; } 
-        public string Description { get; set; }
-        public int quantity { get; set; }
-        public int price { get; set; }
-        public int id { get; set; }
 
-
-        //public Foodie(string n, string desc, int quan,int prices, int id_fd)
-        //{
-        //    Name = n; 
-        //    Description = desc;
-        //    quantity = quan;
-        //    price = prices;
-        //    id = id_fd;
-        //}
-
-        //public  Foodie() 
-        //{
-
-        //}
-
-
-        public void InsertData(SqlConnection con)
+        public new void InsertData(SqlConnection con)
         {
             con.Open();
             SqlCommand cmd = new SqlCommand("INSERT INTO t_food VALUES(@name_food,@description,@quantity,@price,@id_food)", con);
@@ -50,31 +28,31 @@ namespace DB_Tuple_Market_Console
             //con.Close();
         }
 
-        public void DeleteData(SqlConnection con)
+        public new void DeleteData(SqlConnection con)
         {
 
             con.Open();
-                SqlCommand cmd = new SqlCommand("DELETE t_food WHERE id_food=@id_food", con);
-                cmd.Parameters.AddWithValue("@id_food", id);
-                cmd.ExecuteNonQuery();
-           
-                MessageBox.Show("your data already deleted.");
-      
-                  
+            SqlCommand cmd = new SqlCommand("DELETE t_food WHERE id_food=@id_food", con);
+            cmd.Parameters.AddWithValue("@id_food", id);
+            cmd.ExecuteNonQuery();
+
+            MessageBox.Show("your data already deleted.");
+
+
         }
 
-        
+
         //not yet. 
-        public void UpdateData(SqlConnection con)
+        public new void UpdateData(SqlConnection con)
         {
             con.Open();
 
             SqlCommand cmd = new SqlCommand("UPDATE t_food SET name_food=@name_food, description=@description, quantity=@quantity, price=@price WHERE id_food=@id_food ");
-            cmd.Parameters.AddWithValue("@name_food",Name);
-            cmd.Parameters.AddWithValue("@description",Description);
-            cmd.Parameters.AddWithValue("@quantity",quantity);
-            cmd.Parameters.AddWithValue("@price",price);
-            cmd.Parameters.AddWithValue("@id_food",id);
+            cmd.Parameters.AddWithValue("@name_food", Name);
+            cmd.Parameters.AddWithValue("@description", Description);
+            cmd.Parameters.AddWithValue("@quantity", quantity);
+            cmd.Parameters.AddWithValue("@price", price);
+            cmd.Parameters.AddWithValue("@id_food", id);
 
             cmd.ExecuteNonQuery();
 
@@ -83,8 +61,8 @@ namespace DB_Tuple_Market_Console
             MessageBox.Show("Anda Telah merubah Data");
 
         }
-      
-        public void ShowData(SqlConnection con )
+
+        public new void ShowData(SqlConnection con)
         {
             con.Open();
 
@@ -93,7 +71,7 @@ namespace DB_Tuple_Market_Console
 
             while (readers.Read())
             {
-                Console.WriteLine(readers[0] + " -- " + readers[1] + " -- " + readers[2] + "--" + readers[3] + "--"+ readers[4]);
+                Console.WriteLine(readers[0] + " -- " + readers[1] + " -- " + readers[2] + "--" + readers[3] + "--" + readers[4]);
             }
             readers.Close();
 
@@ -102,7 +80,7 @@ namespace DB_Tuple_Market_Console
             //AdapterDate.Fill(dt);
 
             //Console.WriteLine(dt);
-            
+
         }
     }
 }
